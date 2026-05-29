@@ -1,0 +1,24 @@
+# Cargo project for a native Teamfight Manager 2 mod.
+#
+# The uploader / SDK build script detects Cargo.toml first (preferred when you
+# need external crates) and falls back to a bare src/lib.rs otherwise.
+#
+# IMPORTANT: Do NOT add `mod-api` to [dependencies]. The SDK build script and
+# the uploader inject the matching prebuilt `mod_api` crate automatically so the
+# DLL stays binary-compatible with the game/SDK version you build against.
+
+[package]
+name = "example_native"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+# Native mods are loaded as a C-compatible dynamic library.
+crate-type = ["cdylib"]
+
+[dependencies]
+# Add external crates here if you need them. mod_api is provided by the SDK.
+
+[profile.release]
+# Build a release DLL to match the game's release profile.
+opt-level = 3
