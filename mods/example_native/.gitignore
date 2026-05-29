@@ -6,5 +6,8 @@ Cargo.lock
 # commit it to a template/shared repo.
 mod.workshop_id
 
-# The compiled DLL is a build artifact.
+# Compiled output and MSVC linker sidecars are build artifacts.
 *.dll
+*.exp
+*.lib
+*.pdb
