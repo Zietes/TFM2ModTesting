@@ -1,8 +1,28 @@
 # Example Native Mod
 
 A minimal native Rust mod skeleton for **Teamfight Manager 2**. It compiles to
-`example_native.dll`, loads cleanly, and registers no content yet -- a safe
-baseline to build on.
+`example_native.dll`, loads cleanly, and ships a small sample `ModExtension`
+(`HudExtension`) for visible testing.
+
+## Sample: HudExtension
+
+`src/lib.rs` registers a heads-up-display extension that runs every frame on the
+game-loop thread. Once per second, while in a game scene, it reads live state
+from `ClientData` and prints a line such as:
+
+```
+[example_native] frame 3600 | team: <your team name>
+```
+
+to the game's console / log. Seeing that line climb confirms the full chain:
+DLL loaded -> `post_update` ticking every frame -> scene matching ->
+`ClientData` reads working.
+
+The **on-screen overlay** itself (`post_render`) is left as a compiling no-op
+with a `TODO(ui)`: the public modding guide documents the extension lifecycle
+and re-exports the UI types (`Node`, `NodeTemplate`, `RenderState`, `UI`) but
+**not** the methods to draw text / attach nodes. Those live in the SDK's own
+rustdoc -- drop them in there to finish the visible overlay.
 
 ## Layout
 
