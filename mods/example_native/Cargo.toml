@@ -18,7 +18,3 @@ crate-type = ["cdylib"]
 
 [dependencies]
 # Add external crates here if you need them. mod_api is provided by the SDK.
-
-[profile.release]
-# Build a release DLL to match the game's release profile.
-opt-level = 3
