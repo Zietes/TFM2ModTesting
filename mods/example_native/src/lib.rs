@@ -107,21 +107,12 @@ impl ModExtension for HudExtension {
         println!("{line}");
     }
 
-    /// On-screen overlay goes here. This is the ONE part the public modding
-    /// guide does not document -- the exact methods for creating a text/label
-    /// `Node` and attaching it via `RenderState`/`GameUI` live in the SDK's own
-    /// rustdoc. Left as a compiling no-op until we wire those real calls in.
-    ///
-    /// TODO(ui): using `Node` / `NodeTemplate` / `RenderState` from `mod_api`,
-    /// draw `self.hud_text(data)` in a screen corner when `Scene::InGame`.
-    fn post_render(
-        &self,
-        _scene: &Scene,
-        _ui: &GameUI,
-        _assets: &Assets,
-        _state: &mut RenderState,
-    ) {
-    }
+    // NOTE: the on-screen overlay will go in `post_render` (or via the `ui`
+    // handle in `post_update`). It's intentionally NOT implemented yet: the
+    // SDK ships the UI API only as compiled metadata, so we'll recover the
+    // exact `Node`/`UI`/`RenderState` signatures with a compiler-driven probe
+    // and add the real draw calls then. Until that point this mod logs only,
+    // which keeps the first build clean.
 }
 
 // Exports the required DLL entry symbols. Without this the game cannot load it.
